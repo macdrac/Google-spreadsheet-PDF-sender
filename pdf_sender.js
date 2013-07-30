@@ -1,3 +1,5 @@
+// macdrac added parameters for pdf conversion, now it can hide gridlines and print in landscape
+//
 // Copyright 2010 Jiayao Yu
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,8 +68,11 @@ function sendForConfigRow(row) {
 	if (!String(sheetGid).length) {
 	    break;      
 	}
+        // pdf convertion parameters  :  "&gridlines=false&printtitle=false&size=7&fzr=true&portrait=false&fitw=true"
+        var param ="&gridlines=false&fitw=true&printtitle=false&portrait=false";
+	
 	var docId = SpreadsheetApp.getActiveSpreadsheet().getId();
-	var url = SPREADSHEET_URL + docId + "&exportFormat=" + EXPORT_FORMAT + "&gid=" + sheetGid;
+	var url = SPREADSHEET_URL + docId + "&exportFormat=" + EXPORT_FORMAT + "&gid=" + sheetGid + param;
 	var auth = "AuthSub token=\"" + getConfig(row, TOKEN_CELL) + "\"";
 	var attempts = 0;
 	while (attempts++ < 5) {
